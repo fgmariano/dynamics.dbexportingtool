@@ -17,16 +17,9 @@ namespace Dynamics.DbExportingTool.Class
 
         public cDynamics(bool parallelConn = false)
         {
+            service = new CrmServiceClient(cConfig.dynamicsConnection);
             if (parallelConn)
-            {
-                manager = new OrganizationServiceManager(
-                    XrmServiceUriFactory.CreateOrganizationServiceUri(cConfig.dynamicsHost),
-                    cConfig.dynamicsUser, cConfig.dynamicsPass);
-            }
-            else
-            {
-                service = new CrmServiceClient(cConfig.dynamicsConnection);
-            }
+                manager = new OrganizationServiceManager(service);
         }
 
         public Dictionary<string, object> GetAttributes(string entityName, string[] columns)
