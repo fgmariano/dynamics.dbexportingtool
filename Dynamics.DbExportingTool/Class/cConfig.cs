@@ -18,7 +18,9 @@ namespace Dynamics.DbExportingTool.Class
         {
             get
             {
-                return $"AuthType=Office365;Username={dynamicsUser};Password={dynamicsPass};Url={dynamicsHost}";
+                if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["dynamicsConn"]))
+                    return ConfigurationManager.AppSettings["dynamicsConn"];
+                return "";
             }
         }
 
