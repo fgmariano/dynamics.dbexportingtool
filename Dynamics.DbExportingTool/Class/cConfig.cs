@@ -83,5 +83,12 @@ namespace Dynamics.DbExportingTool.Class
                 return "";
             }
         }
+
+        public static string[] Columns(string entity)
+        {
+            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings[$"{entity}.columns"]))
+                return ConfigurationManager.AppSettings[$"{entity}.columns"].Split(',');
+            return new string[0];
+        }
     }
 }

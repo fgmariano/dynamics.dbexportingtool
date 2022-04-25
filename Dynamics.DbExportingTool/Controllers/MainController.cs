@@ -12,11 +12,12 @@ namespace Dynamics.DbExportingTool.Controllers
 
             foreach (var item in cConfig.entities)
             {
+                System.Diagnostics.Debug.WriteLine($"processing {item}");
                 try
                 {
-                    var attr = dyn.GetAttributes(item, cConfig.columns);
+                    var attr = dyn.GetAttributes(item, cConfig.Columns(item));
                     var response = db.CreateTableIfNotExists(item, attr);
-                    var arr = dyn.GetRecords(db, item, attr, cConfig.columns);
+                    var arr = dyn.GetRecords(db, item, attr, cConfig.Columns(item));
                 }
                 catch (System.Exception e)
                 {
